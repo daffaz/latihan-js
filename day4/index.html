@@ -87,9 +87,23 @@
 
       // Array.prototype.sort()
       // 3. Sort the inventors by birthdate, oldest to youngest
+      const sortedInventors = inventors.sort((a, b) => {
+        console.log("Ini A sekarang", `${a.first} => ${a.year}`);
+        console.log("Ini B sekarang", `${b.first} => ${b.year}`);
+        console.log("winner is", a.year - b.year);
+        return a.year - b.year;
+      });
+      console.table(sortedInventors);
 
       // Array.prototype.reduce()
       // 4. How many years did all the inventors live all together?
+      const livingInvestors = inventors.reduce((a, b) => {
+        const umurA = a.passed - a.year;
+        const umurB = b.passed - b.year;
+        console.log(umurA, umurB);
+        return a + umurA;
+      }, 0);
+      console.log(livingInvestors);
 
       // 5. Sort the inventors by years lived
 
