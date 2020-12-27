@@ -26,49 +26,45 @@
         { first: "Lise", last: "Meitner", year: 1878, passed: 1968 },
         { first: "Hanna", last: "Hammarström", year: 1829, passed: 1909 },
       ];
-
-
-
+      
       // Array.prototype.filter()
       // 1. Filter the list of inventors for those who were born in the 1500's
-      const ogInventors = inventors.filter(
-        (inventor) => inventor.year >= 1500 && inventor.year < 1600
-      );
-      console.log(ogInventors);
+      console.log("Nomor 1",inventors.filter(inventor => inventor.year >= 1500 && inventor.year < 1600)); //MY WAY
+      // const ogInventors = inventors.filter(
+      //   (inventor) => inventor.year >= 1500 && inventor.year < 1600
+      // );
+      // console.log(ogInventors);
 
       // Array.prototype.map()
       // 2. Give us an array of the inventors first and last names
-      const inventorsNames = inventors.map(
-        (inventor) => `${inventor.first} ${inventor.last}`
-      );
-      console.log(inventorsNames);
+      console.log("Nomor 2", inventors.map(inventor => `${inventor.first} ${inventor.last} `));
+      // const inventorsNames = inventors.map(
+      //   (inventor) => `${inventor.first} ${inventor.last}`
+      // );
+      // console.log(inventorsNames);
 	  //nice
 
       // Array.prototype.sort()
       // 3. Sort the inventors by birthdate, oldest to youngest
-      const sortedInventors = inventors.sort((a, b) => {
-        console.log("Ini A sekarang", `${a.first} => ${a.year}`);
-        console.log("Ini B sekarang", `${b.first} => ${b.year}`);
-        console.log("winner is", a.year - b.year);
-        return a.year - b.year;
-      });
-      console.table(sortedInventors);
-
+      console.table(inventors.sort((investorA, investorB) => investorA.year - investorB.year ));      
+      
       // Array.prototype.reduce()
       // 4. How many years did all the inventors live all together?
-      const livingInvestors = inventors.reduce(
-        (jumlah, inventor) => jumlah + (inventor.passed - inventor.year),
-        0
-      );
-      console.log(livingInvestors);
+      console.log(inventors.reduce((sum, current) => {
+        return current.passed - current.year + sum
+      }, 0));
 
       // 5. Sort the inventors by years lived
-      const livedInvestors = inventors.sort((a, b) => {
-        const umurA = a.passed - a.year;
-        const umurB = b.passed - b.year;
-        return umurA > umurB ? -1 : 1;
-      });
-      console.table(livedInvestors);
+      console.table(inventors.sort((investorA, investorB) => {
+        return (investorB.passed - investorB.year) - (investorA.passed - investorA.year); 
+      }));
+      
+      // const livedInvestors = inventors.sort((a, b) => {
+      //   const umurA = a.passed - a.year;
+      //   const umurB = b.passed - b.year;
+      //   return umurA > umurB ? -1 : 1;
+      // });
+      // console.table(livedInvestors);
 
       // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
       // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
@@ -151,14 +147,17 @@
         "car",
         "truck",
       ];
-      const transportSum = data.reduce((obj, kendaraan) => {
-        if(!obj[kendaraan]) {
-          obj[kendaraan] = 0;
+      console.log(data.reduce((sum, current) => {
+        if(!sum[current]) {
+          sum[current] = 0
         }
-        obj[kendaraan]+= 1;
-        return obj;
-      }, {});
-      console.table(transportSum);
+        sum[current] += 1;
+        return sum;
+      },{} ));
+      // sum = {}
+      // sum[current] = 0
+      // current => 'mobil'
+      // sum = {'mobil' : 0}
     </script>
   </body>
 </html>
